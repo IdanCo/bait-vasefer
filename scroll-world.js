@@ -310,11 +310,23 @@ function mountScrollWorld(container, config) {
       });
   }
 
+  // Phones have less idle time between scroll updates than a mouse-driven desktop
+  // journey. Keep the current segment and the next two segments downloading before
+  // they enter view, so a normal swipe cannot outrun the Blob-backed video loader.
+  // This deliberately stays a small rolling window rather than fetching the whole
+  // film at once, which avoids holding the entire chain in mobile memory.
+  function preloadMobileAhead(index) {
+    if (!isMobile()) return;
+    const last = Math.min(NSEG - 1, index + 2);
+    for (let i = index; i <= last; i++) loadClip(SEGMENTS[i]);
+  }
+
   function read() {
     const y = window.scrollY || window.pageYOffset;
     const fade = CROSSFADE * vh;
     let ci = 0;
     for (let i = 0; i < NSEG; i++) if (y >= SEGMENTS[i].start) ci = i;
+    preloadMobileAhead(ci);
 
     for (let i = 0; i < NSEG; i++) {
       const s = SEGMENTS[i];
