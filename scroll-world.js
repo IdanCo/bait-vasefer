@@ -78,6 +78,7 @@ function mountScrollWorld(container, config) {
   const DIVE_W = config.diveScroll || 1.3;
   const CONN_W = config.connScroll || 0.9;
   const CROSSFADE = (config.crossfade != null) ? config.crossfade : 0.12;  // seam dissolve width (vh)
+  const MOBILE_PRELOAD_ALL = config.mobilePreloadAll === true;
   const AUTOPLAY = config.autoplay && typeof config.autoplay === 'object' ? config.autoplay : null;
   const AUTOPLAY_DURATION = AUTOPLAY ? Math.max(1, AUTOPLAY.duration || 74) : 0;
   const N = SECTIONS.length;
@@ -321,6 +322,14 @@ function mountScrollWorld(container, config) {
     for (let i = index; i <= last; i++) loadClip(SEGMENTS[i]);
   }
 
+  function preloadMobileFlight() {
+    if (!MOBILE_PRELOAD_ALL || !isMobile()) return;
+    // This page's mobile chain is deliberately compact. Loading it while the
+    // opening poster is on screen guarantees that a swipe cannot reach a still
+    // before its matching motion is ready.
+    SEGMENTS.forEach(loadClip);
+  }
+
   function read() {
     const y = window.scrollY || window.pageYOffset;
     const fade = CROSSFADE * vh;
@@ -443,6 +452,7 @@ function mountScrollWorld(container, config) {
   window.addEventListener('orientationchange', layout);
   window.addEventListener('load', layout);
   layout();
+  preloadMobileFlight();
   requestAnimationFrame(raf);
 
   return { play, pause, toggle: togglePlayback, isPlaying: () => playing };
