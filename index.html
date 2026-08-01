@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#faf9f8" />
+    <meta
+      name="description"
+      content="בית וספר — קורסי העשרה חיים לילדי וילדות חינוך ביתי, בקבוצות קטנות, במחיר נגיש ובפורמט גמיש."
+    />
+    <title>בית וספר — עולמות של סקרנות, מהבית</title>
+    <link rel="icon" href="assets/brand/logo-bait-vasefer.webp" type="image/webp" />
+    <link rel="preload" href="assets/stills/scene-01-home.webp" as="image" type="image/webp" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#world">דלגו למסע</a>
+    <div id="top" aria-hidden="true"></div>
+    <main id="world" tabindex="-1" aria-label="מסע בין הקורסים של בית וספר"></main>
+    <p class="media-error" id="media-error" role="status" hidden>
+      הסרט לא נטען. יש לפתוח את העמוד דרך שרת מקומי או לבדוק את חיבור הרשת.
+    </p>
+
+    <dialog class="registration-dialog" id="registration-dialog" aria-labelledby="registration-title">
+      <form method="dialog">
+        <button class="dialog-close" value="close" aria-label="סגירת חלון ההרשמה">×</button>
+        <img src="assets/brand/logo-bait-vasefer.webp" alt="בית וספר" width="90" height="126" />
+        <h2 id="registration-title">רוצות ורוצים לטעום?</h2>
+        <p>
+          שיעור התנסות עולה 45 ש״ח. בכל קורס משתתפים עד 15 ילדים וילדות, וההרשמה היא לקורס
+          שמתאים לכם — בלי חובה ליום מלא.
+        </p>
+        <p class="dialog-note">
+          לקבלת טופס ההרשמה, פנו לירדן ולאורטל בערוץ שבו קיבלתם את הקישור לעמוד הזה.
+          קישור ישיר יתווסף כאן ברגע שיימסר.
+        </p>
+        <button class="dialog-confirm" value="close">הבנתי, תודה</button>
+      </form>
+    </dialog>
+
+    <noscript>
+      <p class="no-script">כדי לטוס בין העולמות יש להפעיל JavaScript. התמונות והמידע זמינים גם ללא תנועה.</p>
+    </noscript>
+
+    <script src="scroll-world.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
